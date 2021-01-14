@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/choose_background"
+    tools:context=".fragments.FragmentChoose">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:id="@+id/choose_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:src="@drawable/choose_img1"
+                android:id="@+id/choose_img1"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:src="@drawable/logo"
+                android:id="@+id/choose_img2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/choose_img2"
+                app:layout_constraintBottom_toBottomOf="@id/choose_img2"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textStyle="normal"
+                android:fontFamily="@font/montserrat_alternates"                android:textColor="@color/black"
+                android:textSize="@dimen/_25sdp"
+                android:text="@string/bead_designer"
+                android:id="@+id/choose_text1"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layoutDirection="ltr"
+                android:textAlignment="gravity"
+                android:foregroundGravity="left"
+                android:textDirection="ltr"
+                android:layout_marginHorizontal="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_200sdp"
+                android:id="@+id/choose_card1">
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/choose_spinner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
+                    android:textStyle="normal"
+                    android:fontFamily="@font/montserrat_alternates"                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/home_spinner1_text"
+                    android:textDirection="ltr"
+                    android:layoutDirection="ltr"
+                    android:gravity="left"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/_12sdp"
+                    app:ms_arrow_tint="@color/black"
+                    app:ms_hide_arrow="true"
+                    app:ms_hint="@string/home_spinner1_text"
+                    app:ms_hint_color="@color/black"
+                    app:ms_text_color="@color/black"
+                    tools:ignore="RtlCompat" />
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintTop_toBottomOf="@id/choose_card1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="@drawable/border2"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:text="@string/home_btn"
+                android:layout_marginHorizontal="@dimen/_30sdp"
+                android:textStyle="normal"
+                android:fontFamily="@font/montserrat_alternates"                android:layout_marginTop="@dimen/_25sdp"
+                android:textSize="@dimen/_20sdp"
+                android:id="@+id/choose_btn"/>
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintTop_toBottomOf="@id/choose_btn"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                style="@style/SpinKitView.FadingCircle"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/colorAccent"
+                android:visibility="invisible"
+                android:id="@+id/choose_progress"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                app:layout_constraintTop_toBottomOf="@id/choose_progress"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

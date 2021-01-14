@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_40sdp"
+    android:background="@color/colorAccent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/toolbar_logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/reload_icon"
+            android:id="@+id/toolbar_reload"/>
+
+        <ImageView
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/toolbar_text"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/logo"
+            android:id="@+id/toolbar_logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textStyle="normal"
+            android:fontFamily="@font/montserrat_alternates"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_35sdp"
+            android:text="@string/bead_designer"
+            android:id="@+id/toolbar_text"/>
+
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="@id/toolbar_text"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar_text"
+            android:layout_marginTop="@dimen/_3sdp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/yes"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:id="@+id/save_btn"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

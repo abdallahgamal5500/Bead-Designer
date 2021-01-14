@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Bead Designer</string>
+    <string name="home_spinner1_text">Choose bead type</string>
+    <string name="home_btn">Go</string>
+    <string name="bead_designer">Bead Designer</string>
+    <string name="toolbar_spinner">Color</string>
+    <string name="apply_btn">Apply</string>
+</resources>

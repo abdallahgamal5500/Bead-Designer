@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".fragments.FragmentPalette">
+
+    <include
+        layout="@layout/toolbar_palette"
+        android:id="@+id/plate_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/plate_toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.skydoves.colorpickerview.ColorPickerView
+                android:id="@+id/palette_color_picker_view"
+                android:layout_width="@dimen/_175sdp"
+                android:layout_height="@dimen/_200sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <com.skydoves.colorpickerview.sliders.AlphaSlideBar
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@id/palette_color_picker_view"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:borderColor_AlphaSlideBar="@color/colorAccent"
+                app:borderSize_AlphaSlideBar="5"
+                app:selector_AlphaSlideBar="@drawable/wheel"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:id="@+id/palette_alpha_slide_bar"/>
+
+            <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@id/palette_alpha_slide_bar"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                app:borderColor_BrightnessSlider="@color/colorAccent"
+                app:borderSize_BrightnessSlider="5"
+                app:selector_BrightnessSlider="@drawable/wheel"
+                android:id="@+id/palette_brightness_slide"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/palette_recent2"
+                app:layout_constraintTop_toBottomOf="@id/palette_brightness_slide"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:cardCornerRadius="@dimen/_13sdp"
+                app:cardBackgroundColor="@color/colorAccent"
+                android:id="@+id/palette_recent1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_check_24"
+                    android:visibility="invisible"
+                    android:id="@+id/palette_recent1_img"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintLeft_toRightOf="@id/palette_recent1"
+                app:layout_constraintRight_toLeftOf="@id/palette_recent3"
+                app:layout_constraintTop_toBottomOf="@id/palette_brightness_slide"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:cardCornerRadius="@dimen/_13sdp"
+                app:cardBackgroundColor="@color/colorAccent"
+                android:id="@+id/palette_recent2">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_check_24"
+                    android:visibility="invisible"
+                    android:id="@+id/palette_recent2_img"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintLeft_toRightOf="@id/palette_recent2"
+                app:layout_constraintRight_toLeftOf="@id/palette_recent4"
+                app:layout_constraintTop_toBottomOf="@id/palette_brightness_slide"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:cardCornerRadius="@dimen/_13sdp"
+                app:cardBackgroundColor="@color/colorAccent"
+                android:id="@+id/palette_recent3">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_check_24"
+                    android:visibility="invisible"
+                    android:id="@+id/palette_recent3_img"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintLeft_toRightOf="@id/palette_recent3"
+                app:layout_constraintRight_toLeftOf="@id/palette_recent5"
+                app:layout_constraintTop_toBottomOf="@id/palette_brightness_slide"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:cardCornerRadius="@dimen/_13sdp"
+                app:cardBackgroundColor="@color/colorAccent"
+                android:id="@+id/palette_recent4">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_check_24"
+                    android:visibility="invisible"
+                    android:id="@+id/palette_recent4_img"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintLeft_toRightOf="@id/palette_recent4"
+                app:layout_constraintRight_toLeftOf="@id/palette_recent6"
+                app:layout_constraintTop_toBottomOf="@id/palette_brightness_slide"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:cardCornerRadius="@dimen/_13sdp"
+                app:cardBackgroundColor="@color/colorAccent"
+                android:id="@+id/palette_recent5">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_check_24"
+                    android:visibility="invisible"
+                    android:id="@+id/palette_recent5_img"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintLeft_toRightOf="@id/palette_recent5"
+                app:layout_constraintTop_toBottomOf="@id/palette_brightness_slide"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:cardCornerRadius="@dimen/_13sdp"
+                app:cardBackgroundColor="@color/colorAccent"
+                android:id="@+id/palette_recent6">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_check_24"
+                    android:visibility="invisible"
+                    android:id="@+id/palette_recent6_img"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/palette_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat_alternates"
+                android:text="#ffffff"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/palette_alpha_tile_view"
+                app:layout_constraintLeft_toRightOf="@id/palette_color_picker_view"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <com.skydoves.colorpickerview.AlphaTileView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/palette_color_picker_view"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_70sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                app:tileSize="20"
+                android:id="@+id/palette_alpha_tile_view"/>
+
+            <Button
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_40sdp"
+                app:layout_constraintTop_toBottomOf="@+id/palette_recent1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="@drawable/border2"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:text="Apply"
+                android:textStyle="normal"
+                android:fontFamily="sans-serif"
+                android:textAllCaps="false"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_30sdp"
+                android:textSize="@dimen/_20sdp"
+                android:id="@+id/palette_btn"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                app:layout_constraintTop_toBottomOf="@id/palette_alpha_tile_view"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
