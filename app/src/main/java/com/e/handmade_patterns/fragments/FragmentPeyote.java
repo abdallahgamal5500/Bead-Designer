@@ -1,6 +1,8 @@
-package com.example.beaddesigner.fragments;
+package com.e.handmade_patterns.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,13 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.example.beaddesigner.R;
-import com.example.beaddesigner.helper.Help;
-import com.example.beaddesigner.ui.Communicator;
-import com.example.beaddesigner.ui.Home;
-import com.example.beaddesigner.ui.IOnBackPressed;
+import com.e.handmade_patterns.R;
+import com.e.handmade_patterns.helper.Help;
+import com.e.handmade_patterns.ui.Communicator;
+import com.e.handmade_patterns.ui.Home;
+import com.e.handmade_patterns.ui.IOnBackPressed;
 
 public class FragmentPeyote extends Fragment implements View.OnClickListener, IOnBackPressed {
 
@@ -25,6 +28,9 @@ public class FragmentPeyote extends Fragment implements View.OnClickListener, IO
     private ImageView tools_pen,tools_eraser,tools_palette,save_btn,toolbar_reload;
     private Help help;
     private ProgressBar progressBar;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private LinearLayout item_peyote_layout;
 
     public FragmentPeyote() {
     }
@@ -47,6 +53,10 @@ public class FragmentPeyote extends Fragment implements View.OnClickListener, IO
         save_btn = view.findViewById(R.id.save_btn);
         progressBar = view.findViewById(R.id.peyote_progress);
         toolbar_reload = view.findViewById(R.id.toolbar_reload);
+        item_peyote_layout = view.findViewById(R.id.item_peyote_layout);
+
+        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        editor = preferences.edit();
 
         if (Home.TOOLS_STATE[0]) {
             tools_pen.setBackgroundColor(Home.CLICK_COLOR);
@@ -68,6 +78,7 @@ public class FragmentPeyote extends Fragment implements View.OnClickListener, IO
         for (int i=1;i<=1000;i++) {
             int id = getResources().getIdentifier("design_item1_"+i, "id", getContext().getPackageName());
             View temp = view.findViewById(id);
+            temp.setBackgroundColor(Integer.parseInt(preferences.getString(""+id, Color.WHITE+"")));
             temp.setOnClickListener(this);
         }
         return view;
@@ -82,9 +93,11 @@ public class FragmentPeyote extends Fragment implements View.OnClickListener, IO
 
     @Override
     public void onClick(View v) {
-        if (v.getId() != R.id.tools_palette && v.getId() != R.id.tools_eraser && v.getId() != R.id.tools_pen && v.getId() != R.id.save_btn && v.getId() != R.id.toolbar_reload) {
+        if (v.getId() != R.id.tools_palette && v.getId() != R.id.tools_eraser && v.getId() != R.id.tools_pen && v.getId() != R.id.save_btn && v.getId() != R.id.toolbar_reload && v.getId() != R.id.item_peyote_layout) {
             View temp = v.findViewById(v.getId());
             temp.setBackgroundColor(Home.CURRENT_COLOR);
+            editor.putString(v.getId()+"", Home.CURRENT_COLOR+"");
+            editor.commit();
             if (Home.TOOLS_STATE[2]) {
                 Home.TOOLS_STATE[0] = true;
                 Home.TOOLS_STATE[1] = false;
@@ -113,10 +126,17 @@ public class FragmentPeyote extends Fragment implements View.OnClickListener, IO
                     break;
                 case R.id.save_btn:
                     showProgress(View.VISIBLE);
+                    item_peyote_layout.setVisibility(View.GONE);
                     help.saveAndTakeScreenShot();
                     showProgress(View.INVISIBLE);
+                    item_peyote_layout.setVisibility(View.VISIBLE);
                     break;
                 case R.id.toolbar_reload:
+                    for (int i=1;i<=1000;i++) {
+                        int id = getResources().getIdentifier("design_item1_"+i, "id", getContext().getPackageName());
+                        editor.remove(""+id);
+                    }
+                    editor.commit();
                     help.showReloadDialog(FragmentPeyote.getInstance());
                     break;
             }

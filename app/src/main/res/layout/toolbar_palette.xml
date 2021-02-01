@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/_40sdp"
     android:background="@color/colorAccent"
+    android:forceDarkAllowed="false"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -12,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toLeftOf="@id/toolbar_text"
-        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_5sdp"
         android:src="@drawable/logo"
         android:id="@+id/toolbar_logo" />
 
@@ -26,8 +27,8 @@
         android:textStyle="normal"
         android:fontFamily="@font/montserrat_alternates"
         android:textColor="@color/black"
-        android:textSize="@dimen/_20sdp"
-        android:layout_marginLeft="@dimen/_35sdp"
-        android:text="@string/bead_designer"
+        android:textSize="@dimen/_18sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:text="@string/handmade_patterns"
         android:id="@+id/toolbar_text"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

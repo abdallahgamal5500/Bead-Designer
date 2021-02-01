@@ -1,4 +1,4 @@
-package com.example.beaddesigner.helper;
+package com.e.handmade_patterns.helper;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.beaddesigner.R;
+import com.e.handmade_patterns.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -45,7 +45,7 @@ public class Help {
                     public void onPermissionGranted(PermissionGrantedResponse response) {
                         if (bitmap != null) {
                             FileUtil.getInstance().storeBitmap(bitmap,context);
-                            Toast.makeText(context,"Saved successfully to your Gallery", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context,"The screenshot is saved successfully to your Gallery", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(context, "Failed during saving", Toast.LENGTH_LONG).show();
                         }
@@ -101,6 +101,8 @@ public class Help {
                         .replace(R.id.framelayout, fragment)
                         .addToBackStack(null)
                         .commit();
+                Toast.makeText(context, "The screen is cleared successfully", Toast.LENGTH_LONG).show();
+
             }
         });
         builder.setNegativeButton("No",new DialogInterface.OnClickListener() {

@@ -1,4 +1,4 @@
-package com.example.beaddesigner.helper;
+package com.e.handmade_patterns.helper;
 
 import android.app.Activity;
 import android.graphics.Bitmap;

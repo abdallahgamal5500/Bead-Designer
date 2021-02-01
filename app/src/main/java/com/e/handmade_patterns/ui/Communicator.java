@@ -1,4 +1,4 @@
-package com.example.beaddesigner.ui;
+package com.e.handmade_patterns.ui;
 
 import androidx.fragment.app.Fragment;
 

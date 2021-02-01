@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
+    android:forceDarkAllowed="false"
     tools:context=".fragments.FragmentPalette">
 
     <include
@@ -233,8 +234,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
-                app:layout_constraintTop_toBottomOf="@id/palette_alpha_tile_view"
+                android:layout_height="@dimen/_100sdp"
+                app:layout_constraintTop_toBottomOf="@id/palette_btn"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

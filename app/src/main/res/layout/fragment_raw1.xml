@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:forceDarkAllowed="false"
     tools:context=".fragments.FragmentRaw1">
 
     <include
@@ -25,7 +26,8 @@
 
         <LinearLayout
             android:layout_width="@dimen/_30sdp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/raw1_tools_layout">
 
             <include
                 layout="@layout/tools"

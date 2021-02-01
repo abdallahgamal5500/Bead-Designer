@@ -7,6 +7,7 @@
     android:layoutDirection="ltr"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/choose_background"
+    android:forceDarkAllowed="false"
     tools:context=".fragments.FragmentChoose">
 
     <ScrollView
@@ -37,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="@dimen/_35sdp"
-                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
                 android:src="@drawable/logo"
                 android:id="@+id/choose_img2"/>
 
@@ -51,8 +52,8 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textStyle="normal"
                 android:fontFamily="@font/montserrat_alternates"                android:textColor="@color/black"
-                android:textSize="@dimen/_25sdp"
-                android:text="@string/bead_designer"
+                android:textSize="@dimen/_20sdp"
+                android:text="@string/handmade_patterns"
                 android:id="@+id/choose_text1"/>
 
             <androidx.cardview.widget.CardView

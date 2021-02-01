@@ -1,5 +1,7 @@
-package com.example.beaddesigner.fragments;
+package com.e.handmade_patterns.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -13,8 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.beaddesigner.R;
-import com.example.beaddesigner.ui.Home;
+import com.e.handmade_patterns.R;
+import com.e.handmade_patterns.ui.Home;
 import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerView;
@@ -33,6 +35,8 @@ public class FragmentPalette extends Fragment implements View.OnClickListener{
     private ImageView imagesArray [] = new ImageView[6];
     private Button button;
     private ColorEnvelope colorEnvelope;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     public FragmentPalette() {
     }
@@ -55,23 +59,34 @@ public class FragmentPalette extends Fragment implements View.OnClickListener{
         textView = view.findViewById(R.id.palette_textview);
         button = view.findViewById(R.id.palette_btn);
 
+        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        editor = preferences.edit();
+
         button.setOnClickListener(this);
 
         for (int i=1;i<=6;i++) {
-            int id = getResources().getIdentifier("palette_recent"+i, "id", getContext().getPackageName());
+            int id = getResources().getIdentifier("palette_recent" + i, "id", getContext().getPackageName());
             CardView temp = view.findViewById(id);
             temp.setOnClickListener(FragmentPalette.this);
-            int imgId = getResources().getIdentifier("palette_recent"+i+"_img", "id", getContext().getPackageName());
+            int imgId = getResources().getIdentifier("palette_recent" + i + "_img", "id", getContext().getPackageName());
             ImageView temp2 = view.findViewById(imgId);
-            imagesArray[i-1] = temp2;
-            imagesArray[i-1].setOnClickListener(FragmentPalette.this);
+            imagesArray[i - 1] = temp2;
+            imagesArray[i - 1].setOnClickListener(FragmentPalette.this);
 
+            if (Integer.parseInt(preferences.getString("" + (i-1), Color.WHITE + "")) == Color.WHITE) {
+                temp.setVisibility(View.INVISIBLE);
+            } else {
+                temp.setCardBackgroundColor(Integer.parseInt(preferences.getString(""+(i-1),Color.WHITE+"")));
+                temp.setVisibility(View.VISIBLE);
+            }
+            /*
             if (Home.SAVED_RECENT_COLORS[i-1] == Color.WHITE)
                 temp.setVisibility(View.INVISIBLE);
             else {
                 temp.setCardBackgroundColor(Home.SAVED_RECENT_COLORS[i-1]);
                 temp.setVisibility(View.VISIBLE);
             }
+             */
         }
 
         for (int i=1;i<=6;i++) {
@@ -97,7 +112,8 @@ public class FragmentPalette extends Fragment implements View.OnClickListener{
                 textView.setText("#"+envelope.getHexCode());
                 alphaTileView.setPaintColor(envelope.getColor());
 
-                Home.PEN_COLOR = colorEnvelope.getColor();
+                if (colorEnvelope.getColor() != -1)
+                    Home.PEN_COLOR = colorEnvelope.getColor();
             }
         });
         return view;
@@ -111,21 +127,46 @@ public class FragmentPalette extends Fragment implements View.OnClickListener{
                 boolean choseRecentColor = false;
                 Home.CURRENT_COLOR = Home.PEN_COLOR;
                 Home.TOOLS_STATE[2] = true;
+                /*
                 for (i = 0; i < 6; i++) {
                     if (Home.SAVED_RECENT_COLORS[i] == Home.PEN_COLOR)
                         choseRecentColor = true;
                     if (Home.SAVED_RECENT_COLORS[i] == Color.WHITE)
                         break;
                 }
+                 */
+                for (i = 0; i < 6; i++) {
+                    if (Integer.parseInt(preferences.getString(""+i,Color.WHITE+"")) == Home.PEN_COLOR)
+                        choseRecentColor = true;
+                    if (Integer.parseInt(preferences.getString(""+i,Color.WHITE+""))  == Color.WHITE)
+                        break;
+                }
+                /*
                 if (!choseRecentColor) {
                     if (i==6) {
                         for (int j=0;j<5;j++) {
                             Home.SAVED_RECENT_COLORS[j] = Home.SAVED_RECENT_COLORS[j+1];
+                            editor.putString(""+j,preferences.getString(""+(j+1),""+Color.WHITE));
                         }
                         Home.SAVED_RECENT_COLORS[5] = Home.PEN_COLOR;
-                    } else
+                        editor.putString("5",Home.PEN_COLOR+"");
+                    } else {
                         Home.SAVED_RECENT_COLORS[i] = Home.PEN_COLOR;
+                        editor.putString(""+i,""+Home.PEN_COLOR);
+                    }
                 }
+                */
+                if (!choseRecentColor) {
+                    if (i==6) {
+                        for (int j=0;j<5;j++) {
+                            editor.putString(""+j,preferences.getString(""+(j+1),""+Color.WHITE));
+                        }
+                        editor.putString("5",Home.PEN_COLOR+"");
+                    } else {
+                        editor.putString(""+i,""+Home.PEN_COLOR);
+                    }
+                }
+                editor.commit();
                 getFragmentManager().popBackStack();
                 break;
             case R.id.palette_recent1:
@@ -152,7 +193,8 @@ public class FragmentPalette extends Fragment implements View.OnClickListener{
     private void handleCardClicking (int index) {
         for (int i=0;i<6;i++)
             imagesArray[i].setVisibility(View.INVISIBLE);
-        Home.PEN_COLOR = Home.SAVED_RECENT_COLORS[index];
+        //Home.PEN_COLOR = Home.SAVED_RECENT_COLORS[index];
+        Home.PEN_COLOR = Integer.parseInt(preferences.getString(""+index,Color.WHITE+""));
         textView.setTextColor(Home.PEN_COLOR);
         textView.setText("#"+Integer.toHexString(Home.PEN_COLOR));
         alphaTileView.setPaintColor(Home.PEN_COLOR);

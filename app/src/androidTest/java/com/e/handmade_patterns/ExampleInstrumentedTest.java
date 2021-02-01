@@ -1,4 +1,4 @@
-package com.example.beaddesigner;
+package com.e.handmade_patterns;
 
 import android.content.Context;
 

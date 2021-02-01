@@ -1,7 +1,8 @@
-package com.example.beaddesigner.fragments;
+package com.e.handmade_patterns.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,42 +12,52 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.example.beaddesigner.R;
-import com.example.beaddesigner.helper.Help;
-import com.example.beaddesigner.ui.Communicator;
-import com.example.beaddesigner.ui.Home;
-import com.example.beaddesigner.ui.IOnBackPressed;
+import com.e.handmade_patterns.R;
+import com.e.handmade_patterns.helper.Help;
+import com.e.handmade_patterns.ui.Communicator;
+import com.e.handmade_patterns.ui.Home;
+import com.e.handmade_patterns.ui.IOnBackPressed;
 
-public class FragmentBrick extends Fragment implements View.OnClickListener , IOnBackPressed {
 
-    private View view;
+public class FragmentRaw1 extends Fragment implements View.OnClickListener, IOnBackPressed {
+
     private Communicator communicator;
     private ImageView tools_pen,tools_eraser,tools_palette,save_btn,toolbar_reload;
     private Help help;
+    private View view;
     private ProgressBar progressBar;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private LinearLayout raw1_tools_layout;
 
-    public FragmentBrick() {
+    public FragmentRaw1() {
     }
 
-    public static FragmentBrick getInstance() {
-        FragmentBrick fragmentBrick = null;
-        if (fragmentBrick == null)
-            fragmentBrick = new FragmentBrick();
-        return fragmentBrick;
+    public static FragmentRaw1 getInstance() {
+        FragmentRaw1 fragmentRaw1 = null;
+        if (fragmentRaw1 == null)
+            fragmentRaw1 = new FragmentRaw1();
+        return fragmentRaw1;
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_brick, container, false);
+        view =  inflater.inflate(R.layout.fragment_raw1, container, false);
+
         tools_pen = view.findViewById(R.id.tools_pen);
         tools_eraser = view.findViewById(R.id.tools_eraser);
         tools_palette = view.findViewById(R.id.tools_palette);
         save_btn = view.findViewById(R.id.save_btn);
-        progressBar = view.findViewById(R.id.brick_progress);
+        progressBar = view.findViewById(R.id.raw1_progress);
         toolbar_reload = view.findViewById(R.id.toolbar_reload);
+        raw1_tools_layout = view.findViewById(R.id.raw1_tools_layout);
+
+        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        editor = preferences.edit();
 
         if (Home.TOOLS_STATE[0]) {
             tools_pen.setBackgroundColor(Home.CLICK_COLOR);
@@ -59,17 +70,19 @@ public class FragmentBrick extends Fragment implements View.OnClickListener , IO
             tools_pen.setBackgroundColor(Home.COLOR_ACCENT);
         }
 
-        tools_palette.setOnClickListener(FragmentBrick.this);
-        tools_eraser.setOnClickListener(FragmentBrick.this);
-        tools_pen.setOnClickListener(FragmentBrick.this);
-        save_btn.setOnClickListener(FragmentBrick.this);
+        tools_palette.setOnClickListener(this);
+        tools_eraser.setOnClickListener(this);
+        tools_pen.setOnClickListener(this);
+        save_btn.setOnClickListener(this);
         toolbar_reload.setOnClickListener(this);
 
         for (int i=1;i<=900;i++) {
-            int id = getResources().getIdentifier("brick"+i, "id", getContext().getPackageName());
+            int id = getResources().getIdentifier("r1_view"+i, "id", getContext().getPackageName());
             View temp = view.findViewById(id);
-            temp.setOnClickListener(FragmentBrick.this);
+            temp.setBackgroundColor(Integer.parseInt(preferences.getString(""+id, Color.WHITE+"")));
+            temp.setOnClickListener(this);
         }
+
         return view;
     }
 
@@ -80,12 +93,13 @@ public class FragmentBrick extends Fragment implements View.OnClickListener , IO
         help = new Help(context,getActivity());
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
     public void onClick(View v) {
-        if (v.getId() != R.id.tools_palette && v.getId() != R.id.tools_eraser && v.getId() != R.id.tools_pen && v.getId() != R.id.save_btn && v.getId() != R.id.toolbar_reload) {
+        if (v.getId() != R.id.tools_palette && v.getId() != R.id.tools_eraser && v.getId() != R.id.tools_pen && v.getId() != R.id.save_btn && v.getId() != R.id.toolbar_reload && v.getId() != R.id.raw1_tools_layout) {
             View temp = v.findViewById(v.getId());
             temp.setBackgroundColor(Home.CURRENT_COLOR);
+            editor.putString(v.getId()+"", Home.CURRENT_COLOR+"");
+            editor.commit();
             if (Home.TOOLS_STATE[2]) {
                 Home.TOOLS_STATE[0] = true;
                 Home.TOOLS_STATE[1] = false;
@@ -114,11 +128,18 @@ public class FragmentBrick extends Fragment implements View.OnClickListener , IO
                     break;
                 case R.id.save_btn:
                     showProgress(View.VISIBLE);
+                    raw1_tools_layout.setVisibility(View.GONE);
                     help.saveAndTakeScreenShot();
                     showProgress(View.INVISIBLE);
+                    raw1_tools_layout.setVisibility(View.VISIBLE);
                     break;
                 case R.id.toolbar_reload:
-                    help.showReloadDialog(FragmentBrick.getInstance());
+                    for (int i=1;i<=900;i++) {
+                        int id = getResources().getIdentifier("r1_view"+i, "id", getContext().getPackageName());
+                        editor.remove(""+id);
+                    }
+                    editor.commit();
+                    help.showReloadDialog(FragmentRaw1.getInstance());
                     break;
             }
         }
